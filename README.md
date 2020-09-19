@@ -9,10 +9,7 @@ installation. That steps are include:
 * Disable remote root login. The preferred way to gain root permissions is use
   `su` or `sudo` command.
 
-* Add your identity key to `~/.ssh/authorized_keys` on remote host for
-  passwordless login.
-
-* Disable password login (done only if previous step is successful).
+* Disable password login (make sure you have a key installed!).
 
 * Enable [PAM](http://en.wikipedia.org/wiki/Pluggable_authentication_modules).
 
@@ -25,15 +22,13 @@ Option | Description
 --- | ---
 `sshd` | Name of ssh daemon, default is `ssh`.
 `sshd_config` | Path to ssh daemon config, default is `/etc/ssh/sshd_config`.
-`ssh_identity_key` | Path to your identity key. Added to `~/.ssh/authorized_keys` on remote host if both `ssh_identity_key` and `ssh_user` are defined. Default is `undefined`.
-`ssh_user` | Username on remote host whose authorized keys will be modified. Uses only if `ssh_identity_key` is defined. Default is `undefined`.
 
 For example, you can override default variables by passing it as a parameter to
 the role like so:
 
 ```yaml
 roles:
-    - { role: ., ssh_user: vital, ssh_identity_key: /home/vital/.ssh/id_rsa.pub }
+    - { role: ., sshd: sshd }
 ```
 
 Or send them via command line:
