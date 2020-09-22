@@ -19,6 +19,13 @@
     line: 'PasswordAuthentication no'
   notify: restart sshd
 
+- name: Disable challange response
+  lineinfile:
+    dest: "{{ sshd_config }}"
+    regexp: '^(#\s*)?ChallengeResponseAuthentication'
+    line: 'ChallengeResponseAuthentication no'
+  notify: restart sshd
+
 - name: Enable PAM
   lineinfile: 
     dest: "{{ sshd_config }}" 
