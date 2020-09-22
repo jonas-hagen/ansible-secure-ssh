@@ -26,6 +26,13 @@
     line: 'ChallengeResponseAuthentication no'
   notify: restart sshd
 
+- name: Do not include any other files
+  replace:
+    path: "{{ sshd_config }}"
+    regexp: '(^Include\s*.*)'
+    replace: '#\1'
+  notify: restart sshd
+
 - name: Enable PAM
   lineinfile: 
     dest: "{{ sshd_config }}" 
